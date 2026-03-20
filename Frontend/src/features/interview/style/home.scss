@@ -1,0 +1,241 @@
+// ── YOUR VARIABLES ──────────────────────────────────────────────────────────
+$bg-main:     #0f172a; 
+$bg-panel:    #1e293b; 
+$accent:      #38bdf8; 
+$text-bright: #f8fafc;
+$text-muted:  #94a3b8;
+$border:      #334155;
+
+// ── RESET ────────────────────────────────────────────────────────────────────
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; // The "One-Page" enforcer
+  background-color: $bg-main;
+  font-family: 'Inter', sans-serif;
+}
+
+// ── WRAPPER ──────────────────────────────────────────────────────────────────
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  color: $text-bright;
+  box-sizing: border-box;
+}
+
+// ── HEADER ───────────────────────────────────────────────────────────────────
+.home-header {
+  flex-shrink: 0; // Don't let the header squash
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
+    .highlight { color: $accent; }
+  }
+
+  p {
+    color: $text-muted;
+    font-size: 1rem;
+    margin: 0;
+  }
+}
+
+// ── MAIN CONTENT (The Flexible Part) ─────────────────────────────────────────
+.home {
+  display: flex;
+  flex: 1;          // Take up all remaining vertical space
+  min-height: 0;    // Allows children to shrink to fit
+  padding: 1rem 2rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  .left, .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0; // Essential for textarea scrolling
+  }
+
+  // Target Left Textarea (Job Description)
+  .left {
+    .input-label {
+      color: $accent;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    textarea {
+      flex: 1; // Fills the entire left column
+      background-color: $bg-panel;
+      border: 1px solid $border;
+      border-radius: 12px;
+      padding: 1.25rem;
+      color: $text-bright;
+      resize: none;
+      outline: none;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+
+      &:focus { border-color: $accent; }
+      &::placeholder { color: rgba($text-muted, 0.5); }
+    }
+  }
+
+  // Target Right Column (Upload + OR + Self Description)
+  .right {
+    gap: 1rem;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: $accent;
+        text-transform: uppercase;
+      }
+
+      // Resume Input
+      #resume {
+        background: $bg-panel;
+        border: 1px dashed $border;
+        padding: 10px;
+        border-radius: 8px;
+        color: $text-muted;
+        cursor: pointer;
+
+        &::-webkit-file-upload-button {
+          background: $accent;
+          border: none;
+          padding: 6px 12px;
+          border-radius: 4px;
+          margin-right: 10px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+      }
+
+      // Self Description Textarea
+      #selfDescription {
+        flex: 1; // This textarea grows to fill the gap
+        background-color: $bg-panel;
+        border: 1px solid $border;
+        border-radius: 12px;
+        padding: 1rem;
+        color: $text-bright;
+        resize: none;
+        outline: none;
+        min-height: 120px; // Ensure it doesn't disappear on tiny screens
+
+        &:focus { border-color: $accent; }
+      }
+    }
+
+    .or-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: $text-muted;
+      font-size: 0.7rem;
+      font-weight: bold;
+      flex-shrink: 0;
+
+      &::before, &::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid $border;
+      }
+      span { padding: 0 10px; }
+    }
+
+    .generate-btn {
+      flex-shrink: 0; // Button stays the same size
+      width: 100%;
+      padding: 1.1rem;
+      background-color: $accent;
+      color: #0f172a;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.1s;
+
+      &:hover { filter: brightness(1.1); }
+      &:active { transform: scale(0.98); }
+    }
+  }
+}
+
+// ── FOOTER ───────────────────────────────────────────────────────────────────
+.home-footer {
+  flex-shrink: 0;
+  padding: 1.5rem;
+  text-align: center;
+  border-top: 1px solid $border;
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    a {
+      color: $text-muted;
+      text-decoration: none;
+      font-size: 0.8rem;
+      &:hover { color: $accent; }
+    }
+  }
+
+  p {
+    font-size: 0.7rem;
+    color: rgba($text-muted, 0.5);
+    margin: 0;
+  }
+}
+
+// ── LOADER (Overlay) ────────────────────────────────────────────────────────
+.loader-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($bg-main, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    p { color: $accent; font-weight: 600; letter-spacing: 1px; }
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba($accent, 0.1);
+  border-top: 3px solid $accent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
