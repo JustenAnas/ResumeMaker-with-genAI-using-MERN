@@ -10,8 +10,8 @@
 ---
 
 ## 🔗 Live Demo
-* **Frontend (Vercel):** [Add link here]
-* **Backend (Render):** [Add link here]
+* **Frontend (Vercel):** [https://resume-maker-with-gen-ai-using-mern.vercel.app/Register]
+* **Backend (Render):** [https://resumemaker-with-genai-using-mern-1.onrender.com]
 
 ---
 
