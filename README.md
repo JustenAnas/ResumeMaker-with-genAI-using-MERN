@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
   # 🚀 ResumePulse AI | Intelligent Career Co-Pilot
 
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
