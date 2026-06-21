@@ -8,17 +8,16 @@ const api = axios.create({
 
 export async function register({username,email,password}) {
     try {
-       const response = await api.post('/api/auth/register',{
-        username,email,password
-    })
-
-    return response.data
-
+        const response = await api.post('/api/auth/register', {
+            username,
+            email,
+            password
+        })
+        return response.data
     } catch (error) {
-        console.log(error);
-        
+        const message = error.response?.data?.message || "Registration failed"
+        throw new Error(message)
     }
-    
 }
 
 export async function login({email,password}){
@@ -53,10 +52,10 @@ export async function logout(){
 export async function getMe() {
     try {
         const response = await api.get('/api/auth/get-me')
-        return response.data
+        return { success: true, data: response.data }
     } catch (error) {
-        console.log(error);
-        
+        console.log("GET ME FAILED:", error.response?.data || error.message);
+        return { success: false, data: null };
     }
 }
 
